@@ -1,6 +1,11 @@
 class Point
     attr_accessor :longitude, :latitude
 
+    def initialize(long,lat)
+        @longitude=long
+        @latitude=lat
+    end
+
     def mongoize
         if @longitude && @latitude
             return {:type =>"Point", :coordinates=>[@longitude,@latitude]}
@@ -22,10 +27,7 @@ class Point
         case object
             when nil then nil
             when Hash 
-                point = Point.new
-                point.longitude=object[:coordinates][0] if object[:coordinates]
-                point.latitude=object[:coordinates][1] if object[:coordinates]
-                point
+                point = Point.new(object[:coordinates][0], object[:coordinates][1])
             else nil
         end
     end
