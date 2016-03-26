@@ -15,7 +15,7 @@ class LegResult
     doc.calc_ave
   end
 
-  def sec= value
+  def secs= value
     self[:secs]=value
     calc_ave
   end
