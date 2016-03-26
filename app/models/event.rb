@@ -4,7 +4,7 @@ class Event
   field :n, type: String, as: :name
   field :d, type: Float, as: :distance
   field :u, type: String, as: :units
-  embedded_in :event, polymorphic:true
+  embedded_in :parent, polymorphic:true, touch: true
 
   def meters
     result=0
