@@ -9,4 +9,6 @@ class Entrant
   field :gender, type: Placing
   field :group, type: Placing
 
+  embeds_many :results, as: :entrant, class_name: "LegResult"
+
 end
