@@ -9,6 +9,10 @@ class Entrant
   field :gender, type: Placing
   field :group, type: Placing
 
-  embeds_many :results, as: :entrant, class_name: "LegResult"
+  embeds_many :results, as: :entrant, class_name: "LegResult", after_add: :update_total, after_remove: :update_total
+
+  def update_total(result)
+    self.secs=results.inject(0){|s,x| s+x.secs}
+  end
 
 end
