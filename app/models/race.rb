@@ -6,5 +6,7 @@ class Race
   field :date, type: Date
   field :loc, type: Address, as: :location
 
+  scope :upcoming, -> {where(:date.gte=>Date.current)}
+  scope :past, -> {where(:date.lt=>Date.current)}
   embeds_many :events, as: :parent, class_name: "Event", order: [:order.asc]
 end
