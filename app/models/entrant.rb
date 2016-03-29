@@ -16,4 +16,7 @@ class Entrant
     self.secs=results.inject(0){|s,x| s+x.secs}
   end
 
+  def the_race
+    race.race
+  end
 end
