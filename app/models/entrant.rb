@@ -12,6 +12,7 @@ class Entrant
   embeds_many :results, as: :entrant, class_name: "LegResult", after_add: :update_total, after_remove: :update_total
 
   embeds_one :race, class_name: "RaceRef"
+  embeds_one :racer, as: :parent, class_name: "RacerInfo"
   def update_total(result)
     self.secs=results.inject(0){|s,x| s+x.secs}
   end
