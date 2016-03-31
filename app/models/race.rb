@@ -5,6 +5,7 @@ class Race
   field :n, type: String, as: :name
   field :date, type: Date
   field :loc, type: Address, as: :location
+  field :next_bib, type: Integer, default: ->{0}
 
   DEFAULT_EVENTS = {"swim"=>{:order=>0, :name=>"swim", :distance=>1.0, :units=>"miles"},
             "t1"=> {:order=>1, :name=>"t1"},
@@ -39,6 +40,10 @@ class Race
         Race.new do |race|
             DEFAULT_EVENTS.keys.each{|leg|race.send("#{leg}")}
         end
+    end
+    
+    def next_bib
+        self[:next_bib]+=1
     end
 
     ["city", "state"].each do |action|
