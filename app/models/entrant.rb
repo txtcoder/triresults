@@ -24,7 +24,8 @@ class Entrant
   delegate :name, :name=, to: :race, prefix: "race"
   delegate :date, :date=, to: :race, prefix: "race"
 
-
+  scope :upcoming, -> {where(:"race.date".gte=>Date.current)}
+  scope :past, -> {where(:"race.date".lt=>Date.current)}
   def overall_place
     overall.place if overall
   end
