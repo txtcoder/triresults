@@ -43,7 +43,7 @@ class Race
     end
     
     def next_bib
-        self[:next_bib]+=1
+        self.inc(next_bib: 1)[:next_bib]
     end
 
     ["city", "state"].each do |action|
@@ -66,5 +66,20 @@ class Race
             name=min_age >= 60 ? "masters #{gender}" : "#{min_age} to #{max_age} (#{gender})"
             Placing.demongoize(:name=>name)
         end
+    end
+
+    def create_entrant racer
+        entrant = Entrant.new
+        entrant.race = self.attributes.symbolize_keys.slice(:_id,:n,:date)
+        entrant.racer=racer.info.attributes
+        entrant.group=get_group(racer)
+        events.each do |event|
+            entrant.send("#{event.name}=",event)
+        end
+        if entrant.validate
+            entrant.bib=self.next_bib
+            entrant.save
+        end
+        return entrant
     end
 end
