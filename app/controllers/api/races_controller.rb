@@ -17,10 +17,20 @@ module Api
 
     def create
         if !request.accept || request.accept =="*/*"
-            render plain: :nothing, status: :ok
+            render plain: "#{params[:race][:name]}", status: :ok
         else
+            puts "hi"
+            race=Race.create(race_params)
+            race.save
+            render plain: race.name, status: :created
         end
     end
+
+    private
+        def race_params
+            params.require(:race).permit(:name, :date)
+
+        end
   end
 end
 
