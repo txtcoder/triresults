@@ -38,6 +38,9 @@ module Api
         Race.find(params[:id]).destroy
         render :nothing=>true, :status => :no_content
     end
+    rescue_from Mongoid::Errors::DocumentNotFound do |exception|
+        render plain: "woops: cannot find race[#{params[:id]}]", status: :not_found
+    end
 
     private
         def race_params
