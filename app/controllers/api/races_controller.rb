@@ -12,6 +12,8 @@ module Api
         if !request.accept || request.accept == "*/*"
             render plain: "/api/races/#{params[:id]}"
         else
+            race = Race.find(params[:id])
+            render json: race
         end
     end
 
