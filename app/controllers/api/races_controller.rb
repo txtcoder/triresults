@@ -34,6 +34,11 @@ module Api
         render json: race
     end
 
+    def destroy
+        Race.find(params[:id]).destroy
+        render :nothing=>true, :status => :no_content
+    end
+
     private
         def race_params
             params.require(:race).permit(:name, :date)
