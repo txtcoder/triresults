@@ -31,7 +31,7 @@ module Api
     def update
         race=Race.find(params[:id])
         race.update(race_params)
-        render race
+        render json: race
     end
 
     def destroy
