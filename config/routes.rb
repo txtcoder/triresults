@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       resources :entries, only: [:index, :show]
     end
     resources :races do
-      resources :results, only: [:index, :show]
+      resources :results, only: [:index, :show, :update]
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
